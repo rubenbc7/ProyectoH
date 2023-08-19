@@ -12,9 +12,17 @@ public class TargetCollision : MonoBehaviour
     private float currentShakeDuration;
     private float currentShakeIntensity;
 
+    public AudioClip sonido;
+    private AudioSource audioSource;
+    private bool sonidoReproducido = false;
+
     private void Start()
     {
         originalCameraPosition = cameraToShake.localPosition;
+
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = sonido;
+        audioSource.playOnAwake = false;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -26,6 +34,18 @@ public class TargetCollision : MonoBehaviour
         // Start shaking the camera
         currentShakeDuration = shakeDuration;
         StartCoroutine(ShakeCamera());
+
+        if(!sonidoReproducido)
+        {
+            audioSource.PlayOneShot(sonido);
+            sonidoReproducido = true;
+            Debug.Log("SOnidoChoque");
+            Invoke("ResetearBandera", sonido.length);
+        }
+    }
+     private void ResetearBandera()
+    {
+        sonidoReproducido = false;
     }
 
     private IEnumerator ShakeCamera()
