@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Deform : MonoBehaviour
+public class OldDeform : MonoBehaviour
 {
     //[Range(0, 10)]
     [SerializeField] float deformRadius = 0.2f;
@@ -17,31 +17,15 @@ public class Deform : MonoBehaviour
     public AudioClip[] collisionSounds;
  
     private MeshFilter filter;
-    //private Rigidbody physics;
+    private Rigidbody physics;
     private MeshCollider coll;
     private Vector3[] startingVerticies;
     private Vector3[] meshVerticies;
-
-    [SerializeField] MeshFilter[] carParts;
  
     void Start()
     {
-        CombineInstance[] combine = new CombineInstance[carParts.Length];
-        
-        for (int i = 0; i < carParts.Length; i++)
-        {
-            combine[i].mesh = carParts[i].sharedMesh;
-            combine[i].transform = carParts[i].transform.localToWorldMatrix;
-
-        }
-        
-        Mesh combinedMesh = new Mesh();
-        combinedMesh.CombineMeshes(combine);
-        
-        GetComponent<MeshFilter>().sharedMesh = combinedMesh;
-        gameObject.GetComponent<MeshCollider>().sharedMesh = combinedMesh;
-
         filter = GetComponent<MeshFilter>();
+        physics = GetComponent<Rigidbody>();
  
         if (GetComponent<MeshCollider>())
             coll = GetComponent<MeshCollider>();
