@@ -27,21 +27,23 @@ public class TargetCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Calculate shake intensity based on collision force
-        float collisionForce = collision.impulse.magnitude;
-        currentShakeIntensity = Mathf.Clamp(collisionForce * 0.05f, 0f, maxShakeIntensity);
+        if(collision.gameObject.layer != 8 && collision.gameObject.layer != 10){
+            float collisionForce = collision.impulse.magnitude;
+            currentShakeIntensity = Mathf.Clamp(collisionForce * 0.05f, 0f, maxShakeIntensity);
         
-        // Start shaking the camera
-        currentShakeDuration = shakeDuration;
-        StartCoroutine(ShakeCamera());
+            // Start shaking the camera
+            currentShakeDuration = shakeDuration;
+            StartCoroutine(ShakeCamera());
 
-        if(!sonidoReproducido)
-        {
-            audioSource.PlayOneShot(sonido);
-            sonidoReproducido = true;
-            Debug.Log("SOnidoChoque");
-            Invoke("ResetearBandera", sonido.length);
+            if(!sonidoReproducido)
+            {
+                audioSource.PlayOneShot(sonido);
+                sonidoReproducido = true;
+                Invoke("ResetearBandera", sonido.length);
+            }
+            Debug.Log( "collide (name) : " + collision.gameObject.name );
         }
+        
     }
      private void ResetearBandera()
     {
