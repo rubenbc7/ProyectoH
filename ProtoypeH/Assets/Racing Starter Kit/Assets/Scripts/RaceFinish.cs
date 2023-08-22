@@ -22,7 +22,7 @@ public class RaceFinish : MonoBehaviour
         ViewModes.SetActive(false);
 
         //if you win (you finish 1st position)
-        if (PosDisplay.GetComponent<Text>().text == "1st Place")
+        if (PosDisplay.GetComponent<Text>().text == "1st")
         {
             FinishPanelWin.SetActive(true);//win panel turns on
             FinishPanelLose.SetActive(false);//lose panel turns off
