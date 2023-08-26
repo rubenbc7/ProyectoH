@@ -12,7 +12,7 @@ public class LapSelector : MonoBehaviour
 
     private void Start()
     {
-        nLaps = 3 /*Convert.ToInt32(Laps.GetComponent<Text>().text)*/;
+        nLaps = 1 /*Convert.ToInt32(Laps.GetComponent<Text>().text)*/;
         ReactivatePlusButton = MaximumLaps - 1;
     }
     //with the + button in the game, the void Up is called and 1 more lap is added to the race

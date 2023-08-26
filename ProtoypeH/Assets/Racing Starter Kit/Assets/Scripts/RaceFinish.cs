@@ -20,20 +20,22 @@ public class RaceFinish : MonoBehaviour
         PauseButton.SetActive(false);     Panel1.SetActive(false);        Panel2.SetActive(false);
         //viewmodes gets deactivated so you can't change the camera once the race is over
         ViewModes.SetActive(false);
+        
 
         //if you win (you finish 1st position)
         if (PosDisplay.GetComponent<Text>().text == "1st")
-        {
+        {   Time.timeScale = 0.03f;
             FinishPanelWin.SetActive(true);//win panel turns on
             FinishPanelLose.SetActive(false);//lose panel turns off
         }
         //you lose (not 1st position)
         else
         {
+            Time.timeScale = 0.1f;
             FinishPanelWin.SetActive(false);//win panel turns off
             FinishPanelLose.SetActive(true);//lose panel turns on
             AudioListener.volume = 0f;//audio turns off
-            Time.timeScale = 0;//time stops
+            //Time.timeScale = 0;//time stops
         }
     }
 }

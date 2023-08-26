@@ -1602,10 +1602,10 @@ MonoBehaviour:
     value: 1
   filtering:
     overrideState: 1
-    value: {x: 28.487518, y: 80.36441}
+    value: {x: 90.44447, y: 99}
   minLuminance:
     overrideState: 1
-    value: 0
+    value: -3.6
   maxLuminance:
     overrideState: 1
     value: 9
@@ -1617,10 +1617,10 @@ MonoBehaviour:
     value: 0
   speedUp:
     overrideState: 1
-    value: 2
+    value: 0.89
   speedDown:
     overrideState: 1
-    value: 0.94
+    value: 0.74
 --- !u!114 &7903361931859175886
 MonoBehaviour:
   m_ObjectHideFlags: 3
