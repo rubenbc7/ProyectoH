@@ -41,7 +41,7 @@ public class TargetCollision : MonoBehaviour
                 sonidoReproducido = true;
                 Invoke("ResetearBandera", sonido.length);
             }
-            Debug.Log( "collide (name) : " + collision.gameObject.name );
+            //Debug.Log( "collide (name) : " + collision.gameObject.name );
         }
         
     }

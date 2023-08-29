@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 /// <summary>
@@ -16,10 +17,13 @@ public class CarControllerPlayer :MonoBehaviour
 	[SerializeField] Wheel RearRightWheel;
 	[SerializeField] Transform COM;
 	[SerializeField] List<ParticleSystem> BackFireParticles = new List<ParticleSystem>();
+	 public ParticleSystem ps;
 
 	[SerializeField] CarConfig CarConfig;
 
 	#region Properties of car parameters
+	public float MaxNOSCapacity;
+	public float CurrentNosLeft;
 
 	float MaxMotorTorque;
 	float MaxSteerAngle { get { return CarConfig.MaxSteerAngle; } }
@@ -88,13 +92,19 @@ public class CarControllerPlayer :MonoBehaviour
 	float CurrentAcceleration;
 	float CurrentBrake;
     bool InHandBrake;
+	bool InNitro;
 
     int FirstDriveWheel;
 	int LastDriveWheel;
 
+	public UIGauge uIGauge;
+
 	private void Awake ()
 	{
 		RB.centerOfMass = COM.localPosition;
+		CurrentNosLeft = MaxNOSCapacity;
+		
+
 
 		//Copy wheels in public property
 		Wheels = new Wheel[4] {
@@ -146,9 +156,14 @@ public class CarControllerPlayer :MonoBehaviour
 	/// <param name="horizontal">Turn direction</param>
 	/// <param name="vertical">Acceleration</param>
 	/// <param name="brake">Brake</param>
-	public void UpdateControls (float horizontal, float vertical, bool handBrake)
+	/// <param name="nitro">Nitro</param>
+	public void UpdateControls (float horizontal, float vertical, bool handBrake, bool nitro)
 	{
 		float targetSteerAngle = horizontal * MaxSteerAngle;
+		
+        var col = ps.colorOverLifetime;
+        col.enabled = true;
+		Gradient grad = new Gradient();
 
 		if (EnableSteerAngleMultiplier)
 		{
@@ -159,6 +174,28 @@ public class CarControllerPlayer :MonoBehaviour
 
 		CurrentAcceleration = vertical;
         InHandBrake = handBrake;
+		InNitro = nitro;
+
+		if(InNitro && CurrentNosLeft > 0)
+		{
+			grad.SetKeys( new GradientColorKey[] { new GradientColorKey(Color.blue, 1.0f), new GradientColorKey(Color.white, 0.2f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) } );
+			col.color = grad;
+			CurrentAcceleration = CurrentAcceleration * 2;
+			CurrentNosLeft = CurrentNosLeft -1;
+			Debug.Log(CurrentNosLeft);
+			uIGauge.ApplyCalculation(CurrentNosLeft);
+			
+		}
+
+		if(!InNitro)
+		{
+			grad.SetKeys( new GradientColorKey[] { new GradientColorKey(Color.red, 1.0f), new GradientColorKey(Color.white, 0.2f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) } );
+			col.color = grad;
+			CurrentAcceleration = vertical;
+			Debug.Log("Normal");
+			
+			
+		}
 	}
 
 	private void Update ()
@@ -204,6 +241,8 @@ public class CarControllerPlayer :MonoBehaviour
 				CurrentMaxSlipWheelIndex = i;
 			}
 		}
+
+		
 
 	}
 
