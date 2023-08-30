@@ -14,7 +14,7 @@ public class UIGauge : MonoBehaviour
     [SerializeField] private float highGaugeValue;
     [SerializeField] private float topValue;
     [SerializeField] private int direction = -1;
-    [SerializeField] private bool setValueOnAwake = true;
+    [SerializeField] private bool setValueOnAwake = false;
 
     private Vector3 currentRotation;
     private Image fillImage;
@@ -57,9 +57,12 @@ public class UIGauge : MonoBehaviour
         transform.eulerAngles = setRotate;
     }
 
-    void ApplyFill(float fill)
+    private void ApplyFill(float fill)
     {
-        fillImage.fillAmount = fill;
-        fillImage.color = colorGradient.Evaluate(fill);
+        
+            fillImage.fillAmount = fill;
+            fillImage.color = colorGradient.Evaluate(fill);
+        
+        
     }
 }

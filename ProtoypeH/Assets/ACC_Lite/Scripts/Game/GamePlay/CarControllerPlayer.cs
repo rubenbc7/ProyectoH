@@ -176,7 +176,7 @@ public class CarControllerPlayer :MonoBehaviour
         InHandBrake = handBrake;
 		InNitro = nitro;
 
-		if(InNitro && CurrentNosLeft > 0)
+		if(InNitro && CurrentNosLeft > 0 && CurrentAcceleration > 0)
 		{
 			grad.SetKeys( new GradientColorKey[] { new GradientColorKey(Color.blue, 1.0f), new GradientColorKey(Color.white, 0.2f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) } );
 			col.color = grad;
