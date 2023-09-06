@@ -8,6 +8,8 @@ public class Continue : MonoBehaviour
     public void Restart()
     {   //void restart is used in continue buttons when we finish the race and in return button of the pause menu
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);//so it will restart the game's scene
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.01f;
     }
     //if we hit play in the menu at the start of the scene we will use the Play void:
     public void Play()

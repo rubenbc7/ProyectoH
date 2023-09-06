@@ -21,6 +21,11 @@ public class CarSoundController :MonoBehaviour
 	[SerializeField] float MinSlipSound = 0.15f;
 	[SerializeField] float MaxSlipForSound = 1f;
 
+	[Header("NOS start")]
+	[SerializeField] AudioSource NosSource;
+	[SerializeField] AudioClip NosStart;
+	private bool sonidoReproducido = false;
+
 	CarControllerPlayer CarControllerPlayer;
 
 	float MaxRPM { get { return CarControllerPlayer.GetMaxRPM; } }
@@ -54,6 +59,16 @@ public class CarSoundController :MonoBehaviour
 		{
 			SlipSource.Stop ();
 		}
+		if(CarControllerPlayer.InNitro  && !sonidoReproducido && CarControllerPlayer.CurrentSpeed >1f){
+			
+                NosSource.Play();
+				sonidoReproducido = true;
+			
+		}
+		if (!CarControllerPlayer.InNitro)
+        {
+            sonidoReproducido = false;
+        }
 	}
 
 	void PlayBackfire ()

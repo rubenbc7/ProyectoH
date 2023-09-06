@@ -13,6 +13,7 @@ public class Deform : MonoBehaviour
     [SerializeField] float damageMultiplier = 1;
     //[Range(0, 100000)]
     [SerializeField] float minDamage = 1;
+    [SerializeField] float carHealth = 1000f;
 
     public AudioClip[] collisionSounds;
  
@@ -21,8 +22,15 @@ public class Deform : MonoBehaviour
     private MeshCollider coll;
     private Vector3[] startingVerticies;
     private Vector3[] meshVerticies;
+    //public GameObject NormalCamera;
+    public CameraController cameraController;
 
     [SerializeField] MeshFilter[] carParts;
+    Rigidbody m_Rigidbody;
+    public GameObject crashUI;
+    public GameObject raceUI;
+    bool crashed = false;
+    public UIGauge uIHealthGauge;
  
     void Start()
     {
@@ -52,12 +60,34 @@ public class Deform : MonoBehaviour
     
     void OnCollisionEnter(Collision collision)
     {
-        float collisionPower = collision.impulse.magnitude;
+        float collisionPower = (collision.impulse.magnitude)/100;
+        
 
-        float maxDeform = collisionPower / (hardness * 1000);
+        if(carHealth <= 0f && !crashed || collisionPower > 400f || collision.gameObject.tag == "terrain" && !crashed)
+            {
+                Debug.Log(collisionPower);
+                Debug.Log("Animacion chocaste");
+
+                crashed = true;
+                carHealth = 0f;
+                
+                collisionPower = 400f;
+                hardness = hardness/2;
+                //NormalCamera.SetActive(false);
+                //CrashCamera.SetActive(true);
+                cameraController.SetCrashCamera();
+                StartCoroutine(WaitForOneSecond());
+            }
+
+        float maxDeform = collisionPower / (hardness * 100);
+
+        
 
         if (collisionPower > minDamage)
         {
+            carHealth = carHealth - (collisionPower/2);
+            uIHealthGauge.ApplyCalculation(carHealth);
+            
             if (collisionSounds.Length > 0)
                 AudioSource.PlayClipAtPoint(collisionSounds[Random.Range(0, collisionSounds.Length)], transform.position, 0.5f);
  
@@ -87,10 +117,25 @@ public class Deform : MonoBehaviour
                     }
                 }
             }
- 
+            
             UpdateMeshVerticies();
         }
     }
+    private IEnumerator WaitForOneSecond()
+    {
+        Time.timeScale = 0.1f;
+        Time.fixedDeltaTime = Time.timeScale * 0.01f;
+        m_Rigidbody = GetComponent<Rigidbody>();
+        crashUI.SetActive(true);
+        raceUI.SetActive(false);
+        m_Rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        yield return new WaitForSeconds(0.06f);
+        
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.01f;
+        
+    }
+    
  
     void UpdateMeshVerticies()
     {

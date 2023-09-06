@@ -11,6 +11,8 @@ public class IncrementarFovSegunVelocidad : MonoBehaviour
 
     private Camera cam;
     private float fovActual;
+    public CarControllerPlayer carControllerPlayer;
+    float nitroMultiplier = 1f;
 
     private void Start()
     {
@@ -21,22 +23,24 @@ public class IncrementarFovSegunVelocidad : MonoBehaviour
 
     private void Update()
     {
-        if (objetoSeguido == null)
-        {
-            Debug.LogWarning("No se ha asignado un objeto para seguir.");
-            return;
+        float velocidadActual = objetoSeguido.GetComponent<Rigidbody>().velocity.magnitude;
+
+        if(carControllerPlayer.InNitro && velocidadActual > 3f){
+            nitroMultiplier = 1.25f;
+        }
+        if(!carControllerPlayer.InNitro){
+            nitroMultiplier = 1f;
         }
 
         // Obtener la velocidad actual del objeto
-        float velocidadActual = objetoSeguido.GetComponent<Rigidbody>().velocity.magnitude;
 
         // Calcular el FOV objetivo en función de la velocidad
-        float fovObjetivo = fovInicial + (velocidadActual / velocidadMaxima) * (fovMaximo - fovInicial);
+        float fovObjetivo = (fovInicial + (velocidadActual / velocidadMaxima) * (fovMaximo - fovInicial)) * nitroMultiplier;
 
         // Aplicar la interpolación suave para suavizar el cambio de FOV
         fovActual = Mathf.Lerp(fovActual, fovObjetivo, Time.deltaTime * 5f);
 
         // Establecer el FOV de la cámara
-        cam.fieldOfView = fovActual;
+        cam.fieldOfView = fovActual ;
     }
 }

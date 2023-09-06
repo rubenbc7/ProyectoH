@@ -65,7 +65,8 @@ public class CarControllerPlayer :MonoBehaviour
 
 	public CarConfig GetCarConfig { get { return CarConfig; } }
 	public Wheel[] Wheels { get; private set; }										//All wheels, public link.			
-	public System.Action BackFireAction;                                            //Backfire invoked when cut off (You can add a invoke when changing gears).
+	public System.Action BackFireAction;       
+	public CarSoundController carSoundController;                                     //Backfire invoked when cut off (You can add a invoke when changing gears).
 
 	float[] AllGearsRatio;															 //All gears (Reverce, neutral and all forward).
 
@@ -92,7 +93,7 @@ public class CarControllerPlayer :MonoBehaviour
 	float CurrentAcceleration;
 	float CurrentBrake;
     bool InHandBrake;
-	bool InNitro;
+	public bool InNitro;
 
     int FirstDriveWheel;
 	int LastDriveWheel;
@@ -176,26 +177,31 @@ public class CarControllerPlayer :MonoBehaviour
         InHandBrake = handBrake;
 		InNitro = nitro;
 
-		if(InNitro && CurrentNosLeft > 0 && CurrentAcceleration > 0)
+		if(InNitro && CurrentNosLeft > 0 && CurrentSpeed > 1f)
 		{
 			grad.SetKeys( new GradientColorKey[] { new GradientColorKey(Color.blue, 1.0f), new GradientColorKey(Color.white, 0.2f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) } );
 			col.color = grad;
-			CurrentAcceleration = CurrentAcceleration * 2;
+			CurrentAcceleration = CurrentAcceleration * 2f;
 			CurrentNosLeft = CurrentNosLeft -1;
-			Debug.Log(CurrentNosLeft);
+			//Debug.Log(CurrentNosLeft);
 			uIGauge.ApplyCalculation(CurrentNosLeft);
 			
 		}
 
+		if(CurrentNosLeft <= 0)
+		{
+			InNitro = false;
+		}
 		if(!InNitro)
 		{
 			grad.SetKeys( new GradientColorKey[] { new GradientColorKey(Color.red, 1.0f), new GradientColorKey(Color.white, 0.2f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) } );
 			col.color = grad;
 			CurrentAcceleration = vertical;
-			Debug.Log("Normal");
+			//Debug.Log("Normal");
 			
 			
 		}
+		
 	}
 
 	private void Update ()

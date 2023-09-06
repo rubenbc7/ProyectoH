@@ -13,7 +13,7 @@ public class LapTimeManager : MonoBehaviour
     {
         MilliCount += Time.deltaTime * 10;
         MilliDisplay = MilliCount.ToString("F0");//here we set the milliseconds display numbers after the comma
-        MilliBox.GetComponent<Text>().text = "" + MilliDisplay + "0";
+        MilliBox.GetComponent<Text>().text = MilliDisplay +"0";
 
         if (MilliCount >= 10)
         {

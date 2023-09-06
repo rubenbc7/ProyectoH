@@ -79,6 +79,13 @@ public class CameraController :Singleton<CameraController>
 		ActivePresetIndex = MathExtentions.LoopClamp (ActivePresetIndex + 1, 0, CamerasPreset.Count);
 		UpdateActiveCamera ();
 	}
+	
+
+	public void SetCrashCamera()
+	{
+		ActivePresetIndex = MathExtentions.LoopClamp (3, 0, CamerasPreset.Count);
+		UpdateActiveCamera();
+	}
 
 	public void UpdateActiveCamera ()
 	{

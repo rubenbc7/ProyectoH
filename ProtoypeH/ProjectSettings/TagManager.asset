@@ -9,6 +9,7 @@ TagManager:
   - AICarCollider
   - Car
   - wheel
+  - terrain
   layers:
   - Default
   - TransparentFX
