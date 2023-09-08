@@ -15,6 +15,8 @@ public class TargetCollision : MonoBehaviour
     public AudioClip sonido;
     private AudioSource audioSource;
     private bool sonidoReproducido = false;
+    public CarControllerPlayer carControllerPlayer;
+    public Deform deform;
 
     private void Start()
     {
@@ -27,6 +29,13 @@ public class TargetCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if(collision.gameObject.tag == "Pits")
+        {
+            carControllerPlayer.CurrentNosLeft = carControllerPlayer.MaxNOSCapacity;
+            deform.carHealth = 500f;
+            Debug.Log("pits");
+        }
+        
         if(collision.gameObject.layer != 8 && collision.gameObject.layer != 10){
             float collisionForce = collision.impulse.magnitude;
             currentShakeIntensity = Mathf.Clamp(collisionForce * 0.05f, 0f, maxShakeIntensity);

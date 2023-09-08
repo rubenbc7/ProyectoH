@@ -26,12 +26,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 081fd18130a05374a90876a941fde9a1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Scale: {x: 1.71, y: 0.77}
+        m_Offset: {x: 0.12, y: 0}
     - _NormalTex:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Scale: {x: 1.71, y: 0.77}
+        m_Offset: {x: 0.12, y: 0}
     m_Ints: []
     m_Floats:
     - _FresnelBrightness: 0

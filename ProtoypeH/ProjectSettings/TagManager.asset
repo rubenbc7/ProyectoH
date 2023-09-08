@@ -10,6 +10,7 @@ TagManager:
   - Car
   - wheel
   - terrain
+  - Pits
   layers:
   - Default
   - TransparentFX
