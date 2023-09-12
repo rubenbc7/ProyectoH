@@ -31,6 +31,7 @@ public class UserControl :MonoBehaviour
 			//Mobile control.
 			Horizontal = CurrentUIControl.GetHorizontalAxis;
 			Vertical = CurrentUIControl.GetVerticalAxis;
+			Nitro = CurrentUIControl.GetNitroBool;
 		}
 		else
 		{

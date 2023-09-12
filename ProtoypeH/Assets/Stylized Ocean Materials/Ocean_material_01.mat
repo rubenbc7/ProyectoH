@@ -121,7 +121,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _NoiseLerpModifier: 0.0501
-    - _Noiselevel: 0.0709
+    - _Noiselevel: 0.0283
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ShinePower: 4
@@ -130,8 +130,8 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _WaterDepth: 2.09
-    - _WaterOpacity: 0.281
+    - _WaterDepth: 2.8
+    - _WaterOpacity: 0.455
     - _WaterOrientation: 2.27
     - _Whites_opacity: 0.898
     - _Whole_opacity: 0.803
@@ -148,6 +148,6 @@ Material:
     m_Colors:
     - _Color: {r: 0.7880324, g: 0.7205882, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _WaterColor: {r: 0.5977661, g: 0.64358085, b: 0.9528302, a: 1}
+    - _WaterColor: {r: 0, g: 0.1034019, b: 1, a: 1}
     - _node_3975: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

@@ -14,12 +14,14 @@ public class MobileControlUI : MonoBehaviour
 	[SerializeField] CustomButton TurnRigthButton;
 	[SerializeField] CustomButton AccelerationButton;
 	[SerializeField] CustomButton DecelerationButton;
+	[SerializeField] CustomButton NitroButton;
 
 	bool LeftPressed { get { return TurnLeftButton.ButtonIsPressed; } }
 	bool RightPressed { get { return TurnRigthButton.ButtonIsPressed; } }
 	bool AccelerationPressed { get { return AccelerationButton.ButtonIsPressed; } }
 	bool DecelerationPressed { get { return DecelerationButton.ButtonIsPressed; } }
-	public bool ControlInUse { get { return LeftPressed || RightPressed || AccelerationPressed || DecelerationPressed; } }
+	bool NitroPressed {get{return NitroButton.ButtonIsPressed;}}
+	public bool ControlInUse { get { return LeftPressed || RightPressed || AccelerationPressed || DecelerationPressed || NitroPressed; } }
 
 	public float GetHorizontalAxis
 	{
@@ -50,6 +52,19 @@ public class MobileControlUI : MonoBehaviour
 				return -1;
 			}
 			return 0;
+		}
+	}
+	public bool GetNitroBool
+	{
+		get
+		{
+			if(NitroPressed)
+			{
+				return true;
+			}
+			else{
+				return false;
+			}
 		}
 	}
 }
