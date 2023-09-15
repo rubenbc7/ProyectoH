@@ -62,10 +62,10 @@ public class AICarBehaviour : MonoBehaviour
         //after that, it will bring back the normal torque of the car so it goes forward again
         AICarController.m_FullTorqueOverAllWheels = AICarController.m_FullTorqueOverAllWheels + NormalTorque + NormalTorque;
         //after one second, the car will be able to turn again
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         AICarController.m_MaximumSteerAngle = NormalSteering;
         //and after one last second, we can now check again if the AI car needs another reverse
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         CheckReverse = 1;
         yield return null;
     }
@@ -73,7 +73,7 @@ public class AICarBehaviour : MonoBehaviour
     //check if there's a player or AI car inside the box collider and brake
     void OnTriggerEnter(Collider col)
     {
-        if (/*col.tag == "Player" ||*/ col.tag == "AICarCollider")
+        if (col.tag == "Player" || col.tag == "AICarCollider")
         {
             AICarController.m_Topspeed = 30;
             AICarController.m_MaximumSteerAngle = 100;//brakes are actually reducing the topspeed of the car
@@ -82,7 +82,7 @@ public class AICarBehaviour : MonoBehaviour
     //if the AI/player car exits the box collider:
     void OnTriggerExit(Collider col)
     {
-        if (/*col.tag == "Player" ||*/ col.tag == "AICarCollider")
+        if ( col.tag == "AICarCollider")
         {
             AICarController.m_Topspeed = NormalTopspeed;//bring back the normal topspeed
             AICarController.m_MaximumSteerAngle = NormalSteering;

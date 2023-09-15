@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: asphalt_02_diff_2k
-  m_Shader: {fileID: 4800000, guid: 8fa84e1c8f3a97b4bb416e8eb087630e, type: 3}
+  m_Shader: {fileID: 4800000, guid: 1fe8cefbb0066914f8f323f408d6b201, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -26,7 +26,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 081fd18130a05374a90876a941fde9a1, type: 3}
-        m_Scale: {x: 1.71, y: 0.77}
+        m_Scale: {x: 2.85, y: 0.47}
         m_Offset: {x: 0.12, y: 0}
     - _NormalTex:
         m_Texture: {fileID: 0}

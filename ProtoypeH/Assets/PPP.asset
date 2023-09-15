@@ -1,42 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6672017459697666891
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a34fa72bd4185749832024e9c8010bf, type: 3}
-  m_Name: ScreenSpaceReflections
-  m_EditorClassIdentifier: 
-  active: 1
-  enabled:
-    overrideState: 1
-    value: 1
-  preset:
-    overrideState: 1
-    value: 2
-  maximumIterationCount:
-    overrideState: 1
-    value: 16
-  resolution:
-    overrideState: 1
-    value: 0
-  thickness:
-    overrideState: 1
-    value: 8
-  maximumMarchDistance:
-    overrideState: 1
-    value: 110
-  distanceFade:
-    overrideState: 1
-    value: 0.375
-  vignette:
-    overrideState: 1
-    value: 0.114
 --- !u!114 &-4648673446476542039
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1366,22 +1329,22 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 3.45
+    value: 9.5
   threshold:
     overrideState: 1
-    value: 0.89
+    value: 1.05
   softKnee:
     overrideState: 1
-    value: 0.638
+    value: 0.27
   clamp:
     overrideState: 1
     value: 65566.8
   diffusion:
     overrideState: 1
-    value: 6.11
+    value: 4
   anamorphicRatio:
     overrideState: 1
-    value: 0.74
+    value: -1
   color:
     overrideState: 1
     value: {r: 1, g: 1, b: 1, a: 1}
@@ -1473,7 +1436,7 @@ MonoBehaviour:
     defaultState: 1
   intensity:
     overrideState: 1
-    value: 0.15
+    value: 0.1
   fastMode:
     overrideState: 0
     value: 0
@@ -1495,7 +1458,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: -19
+    value: -8
   intensityX:
     overrideState: 1
     value: 1
@@ -1534,7 +1497,6 @@ MonoBehaviour:
   - {fileID: -2342210834090960190}
   - {fileID: 8152600107565364685}
   - {fileID: -1326198316635232243}
-  - {fileID: -6672017459697666891}
 --- !u!114 &245526967929070908
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1617,10 +1579,10 @@ MonoBehaviour:
     value: 0
   speedUp:
     overrideState: 1
-    value: 0.89
+    value: 2
   speedDown:
     overrideState: 1
-    value: 0.74
+    value: 1
 --- !u!114 &7903361931859175886
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1670,10 +1632,10 @@ MonoBehaviour:
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
-    value: 0.345
+    value: 0.42
   smoothness:
     overrideState: 1
-    value: 0.3
+    value: 0.24
   roundness:
     overrideState: 1
     value: 1

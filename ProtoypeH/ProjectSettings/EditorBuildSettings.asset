@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/UI_and_Particles.unity
+    guid: ca58a3898e7e93a438b94e6b86eb2a21
   m_configObjects: {}

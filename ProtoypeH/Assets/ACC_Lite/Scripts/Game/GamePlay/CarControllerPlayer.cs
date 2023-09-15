@@ -18,6 +18,9 @@ public class CarControllerPlayer :MonoBehaviour
 	[SerializeField] Transform COM;
 	[SerializeField] List<ParticleSystem> BackFireParticles = new List<ParticleSystem>();
 	 public ParticleSystem ps;
+	 public ParticleSystem ps1;
+	 public ParticleSystem ps2;
+	 public ParticleSystem ps3;
 
 	[SerializeField] CarConfig CarConfig;
 
@@ -163,7 +166,11 @@ public class CarControllerPlayer :MonoBehaviour
 		float targetSteerAngle = horizontal * MaxSteerAngle;
 		
         var col = ps.colorOverLifetime;
-        col.enabled = true;
+		var col1 = ps1.colorOverLifetime;
+		var col2 = ps2.colorOverLifetime;
+		var col3 = ps3.colorOverLifetime;
+        col3.enabled = col2.enabled = col1.enabled = col.enabled = true;
+
 		Gradient grad = new Gradient();
 
 		if (EnableSteerAngleMultiplier)
@@ -180,7 +187,7 @@ public class CarControllerPlayer :MonoBehaviour
 		if(InNitro && CurrentNosLeft > 0 && CurrentSpeed > 1f)
 		{
 			grad.SetKeys( new GradientColorKey[] { new GradientColorKey(Color.blue, 1.0f), new GradientColorKey(Color.white, 0.2f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) } );
-			col.color = grad;
+			col3.color = col2.color = col1.color = col.color = grad;
 			CurrentAcceleration = CurrentAcceleration * 2f;
 			CurrentNosLeft = CurrentNosLeft -1;
 			//Debug.Log(CurrentNosLeft);
@@ -195,7 +202,7 @@ public class CarControllerPlayer :MonoBehaviour
 		if(!InNitro)
 		{
 			grad.SetKeys( new GradientColorKey[] { new GradientColorKey(Color.red, 1.0f), new GradientColorKey(Color.white, 0.2f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) } );
-			col.color = grad;
+			col3.color = col2.color = col1.color = col.color = grad;
 			CurrentAcceleration = vertical;
 			//Debug.Log("Normal");
 			
