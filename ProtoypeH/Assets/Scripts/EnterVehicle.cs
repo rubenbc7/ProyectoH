@@ -47,6 +47,28 @@ public class EnterVehicle : MonoBehaviour
         car.GetComponent<CarControllerPlayer>().enabled = false;
         //car_cam.SetActive(false);
     }
+    
+    void Update()
+    {
+        // Verifica si se ha presionado la tecla "e"
+        if (Input.GetKeyDown(eButton))
+        {
+            // Si el jugador está dentro del carro, sale; de lo contrario, entra en el carro
+            if (inVehicle)
+            {
+                exit_from_car();
+            }
+            else
+            {
+                // Verifica si el jugador está cerca del carro antes de entrar
+                float distanceToCar = Vector3.Distance(player.transform.position, car.transform.position);
+                if (distanceToCar < 5.0f) // Cambia este valor según la distancia adecuada
+                {
+                    enter_in_car();
+                }
+            }
+        }
+    }
 
     void OnTriggerStay(Collider other)
     {
@@ -55,10 +77,6 @@ public class EnterVehicle : MonoBehaviour
             print("triggered");
 
                 enterbutton.SetActive(true);
-                if (Input.GetButtonDown(eButton) && !inVehicle){
-                    enter_in_car();           
-                    return;         
-                }
         }
     }
     private IEnumerator timelineoff()

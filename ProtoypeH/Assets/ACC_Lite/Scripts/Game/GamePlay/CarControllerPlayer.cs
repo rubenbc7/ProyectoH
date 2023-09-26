@@ -218,9 +218,9 @@ public class CarControllerPlayer :MonoBehaviour
 		{
 			Wheels[i].UpdateVisual ();
 		}
-		if(Input.GetButtonDown("e")){
-			enterVehicle.exit_from_car();
-		}
+		//if(Input.GetButtonDown("e") && enterVehicle.inVehicle == true){
+		//	enterVehicle.exit_from_car();
+		//}
 	}
 
 	private void FixedUpdate ()
