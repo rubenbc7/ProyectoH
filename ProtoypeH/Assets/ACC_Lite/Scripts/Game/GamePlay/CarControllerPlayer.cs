@@ -102,6 +102,7 @@ public class CarControllerPlayer :MonoBehaviour
 	int LastDriveWheel;
 
 	public UIGauge uIGauge;
+	public EnterVehicle enterVehicle;
 
 	private void Awake ()
 	{
@@ -216,6 +217,9 @@ public class CarControllerPlayer :MonoBehaviour
 		for (int i = 0; i < Wheels.Length; i++)
 		{
 			Wheels[i].UpdateVisual ();
+		}
+		if(Input.GetButtonDown("e")){
+			enterVehicle.exit_from_car();
 		}
 	}
 
