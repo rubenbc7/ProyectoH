@@ -3,6 +3,7 @@
 // This class is created for the example scene. There is no support for this script.
 public class ControlsTutorial : MonoBehaviour
 {
+	public bool lockedMouse;
 	private string message = "";
 	private bool showMsg = false;
 
@@ -14,9 +15,11 @@ public class ControlsTutorial : MonoBehaviour
 
 	private GameObject keyboardCommands;
 	private GameObject gamepadCommands;
+	public bool mouselocked;
 
 	void Awake()
 	{
+		lockedMouse = true;
 		style = new GUIStyle();
 		style.alignment = TextAnchor.MiddleCenter;
 		style.fontSize = 36;
@@ -31,14 +34,14 @@ public class ControlsTutorial : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
+		if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || mouselocked == false)//Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
 		{
 			Cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 		}
-		if (Input.GetKeyDown("escape"))
+		if (Input.GetKeyDown("escape") || mouselocked == true)
 		{
-			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.lockState = CursorLockMode.Confined;
 			Cursor.visible = true;
 		}
 		keyboardCommands.SetActive(Input.GetKey(KeyCode.F2));
