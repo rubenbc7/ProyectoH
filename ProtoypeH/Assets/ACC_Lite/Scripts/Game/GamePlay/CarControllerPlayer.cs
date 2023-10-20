@@ -189,7 +189,7 @@ public class CarControllerPlayer :MonoBehaviour
 		{
 			grad.SetKeys( new GradientColorKey[] { new GradientColorKey(Color.blue, 1.0f), new GradientColorKey(Color.white, 0.2f) }, new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 1.0f) } );
 			col3.color = col2.color = col1.color = col.color = grad;
-			CurrentAcceleration = CurrentAcceleration * 2f;
+			CurrentAcceleration = CurrentAcceleration * 4f;
 			CurrentNosLeft = CurrentNosLeft -1;
 			//Debug.Log(CurrentNosLeft);
 			uIGauge.ApplyCalculation(CurrentNosLeft);
