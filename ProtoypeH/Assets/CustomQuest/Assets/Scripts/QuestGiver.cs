@@ -112,6 +112,8 @@ public class QuestGiver : MonoBehaviour
     {
         if (radius > 0 && walkIntoStartQuest == true)
         {
+            mouseLocker = GameObject.FindGameObjectWithTag("GameController");
+            controlsTutorial = mouseLocker.GetComponent<ControlsTutorial>();
             CQPlayerObject player = coll.GetComponent<CQPlayerObject>();
             if (player == null)
             {

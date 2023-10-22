@@ -13,7 +13,7 @@ public class Deform : MonoBehaviour
     [SerializeField] float damageMultiplier = 1;
     //[Range(0, 100000)]
     [SerializeField] float minDamage = 1;
-    [SerializeField] public float carHealth = 500f;
+    [SerializeField] public float carHealth = 1000f;
 
     public AudioClip[] collisionSounds;
  

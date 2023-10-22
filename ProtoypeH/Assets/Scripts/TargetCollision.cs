@@ -36,7 +36,7 @@ public class TargetCollision : MonoBehaviour
             Debug.Log("pits");
         }
         
-        if(collision.gameObject.layer != 8 && collision.gameObject.layer != 10){
+        if(collision.gameObject.layer != 8 && collision.gameObject.layer != 10 && collision.gameObject.tag != "Prota"){
             float collisionForce = collision.impulse.magnitude;
             currentShakeIntensity = Mathf.Clamp(collisionForce * 0.05f, 0f, maxShakeIntensity);
         

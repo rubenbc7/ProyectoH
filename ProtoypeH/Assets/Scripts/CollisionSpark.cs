@@ -8,11 +8,15 @@ public class CollisionSpark : MonoBehaviour
     public float sparksDuration = 1f; // Duration of the particle effect
     private void OnCollisionEnter(Collision collision)
     {
-        ContactPoint contact = collision.contacts[0]; // Get the first contact point
-        GameObject sparks = ObjectPoolManager.Instance.GetPooledObject();
-        sparks.transform.position = contact.point;
-        //Instantiate(sparksPrefab, contact.point, Quaternion.identity);
+        if(collision.gameObject.tag != "Prota")
+        {
+            ContactPoint contact = collision.contacts[0]; // Get the first contact point
+            GameObject sparks = ObjectPoolManager.Instance.GetPooledObject();
+            sparks.transform.position = contact.point;
+            //Instantiate(sparksPrefab, contact.point, Quaternion.identity);
 
-        ObjectPoolManager.Instance.ReturnToPoolDelayed(sparks, sparksDuration);
+            ObjectPoolManager.Instance.ReturnToPoolDelayed(sparks, sparksDuration);
+        }
+        
     }
 }
