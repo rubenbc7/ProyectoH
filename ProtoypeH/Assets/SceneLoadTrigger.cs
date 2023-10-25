@@ -1,5 +1,7 @@
+
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,52 +9,55 @@ public class SceneLoadTrigger : MonoBehaviour
 {
     [SerializeField] private SceneField[] _scenesToLoad;
     [SerializeField] private SceneField[] _scenesToUnload;
-    // Start is called before the first frame update
-    private GameObject _player;
-    private void Awake()
-    {
-        _player = GameObject.FindGameObjectWithTag("Player");
-    }
+
+    private bool loadingScenes = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject == _player){
-            LoadScenes();
-            UnloadScenes();
-        }
-    }
-    // Update is called once per frame
-    private void LoadScenes(){
-        for(int i = 0; i< _scenesToLoad.Length; i ++){
-            bool isSceneLoaded = false;
-            for(int j = 0; j < SceneManager.sceneCount; j ++)
-            {
-                Scene loadedScene = SceneManager.GetSceneAt(j);
-                if(loadedScene.name == _scenesToLoad[i].SceneName)
-                {
-                    isSceneLoaded = true;
-                    break;
-                }            
-            }
-            if(!isSceneLoaded){
-                SceneManager.LoadSceneAsync(_scenesToLoad[i], LoadSceneMode.Additive);
-            }
-        }
-
-    }
-     private void UnloadScenes()
-     {
-        for(int i = 0; i < _scenesToUnload.Length; i++)
+        if (other.CompareTag("Player") && !loadingScenes)
         {
-            for(int j = 0; j < SceneManager.sceneCount; j++)
-            {
-                Scene loadedScene = SceneManager.GetSceneAt(j);
-                if(loadedScene.name == _scenesToUnload[i].SceneName)
-                {
-                    SceneManager.UnloadSceneAsync(_scenesToUnload[i]);
-                }            
-            }
+            StartCoroutine(LoadScenesAsync());
         }
     }
 
+    private IEnumerator LoadScenesAsync()
+    {
+        loadingScenes = true;
+
+        foreach (var sceneToLoad in _scenesToLoad)
+        {
+            if (!SceneManager.GetSceneByName(sceneToLoad.SceneName).isLoaded)
+            {
+                AsyncOperation operation = SceneManager.LoadSceneAsync(sceneToLoad, LoadSceneMode.Additive);
+                operation.allowSceneActivation = false; // Evita que la escena se active automáticamente
+
+                while (!operation.isDone)
+                {
+                    float progress = Mathf.Clamp01(operation.progress / 0.9f); // Limita el progreso a 0-1
+                    Debug.Log("Cargando escena " + sceneToLoad.SceneName + " - Progreso: " + (progress * 100) + "%");
+
+                    if (progress >= 0.9f)
+                    {
+                        operation.allowSceneActivation = true; // Activa la escena cuando esté casi cargada
+                    }
+
+                    yield return null; // Espera un frame antes de la siguiente iteración
+                }
+            }
+        }
+
+        UnloadScenes();
+        loadingScenes = false;
+    }
+
+    private void UnloadScenes()
+    {
+        foreach (var sceneToUnload in _scenesToUnload)
+        {
+            if (SceneManager.GetSceneByName(sceneToUnload.SceneName).isLoaded)
+            {
+                SceneManager.UnloadSceneAsync(sceneToUnload.SceneName);
+            }
+        }
+    }
 }

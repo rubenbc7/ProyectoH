@@ -27,7 +27,7 @@ public class AICarBehaviour : MonoBehaviour
     {
         //the script will wait 3 seconds so the AI car can get enough speed after starting the race
         //otherwise if you don't wait, the car always start at 0 speed so it will trigger the reverse coroutine
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         CheckReverse = 1;//now that 3 seconds passed we can check if the AI car needs to use the 1 second reverse
         yield return null;
     }
@@ -73,7 +73,7 @@ public class AICarBehaviour : MonoBehaviour
     //check if there's a player or AI car inside the box collider and brake
     void OnTriggerEnter(Collider col)
     {
-        if (col.tag == "Player" || col.tag == "AICarCollider")
+        if (col.tag == "Player" || col.tag == "AICarCollider" || col.tag == "Prota")
         {
             AICarController.m_Topspeed = 30;
             AICarController.m_MaximumSteerAngle = 100;//brakes are actually reducing the topspeed of the car

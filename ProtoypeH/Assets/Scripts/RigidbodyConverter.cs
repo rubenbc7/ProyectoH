@@ -14,7 +14,7 @@ public class RigidbodyConverter : MonoBehaviour
             {
                 // Agrega un componente Rigidbody al objeto.
                 rb = gameObject.AddComponent<Rigidbody>();
-                Debug.Log("Se agregó un componente Rigidbody al objeto.");
+                //Debug.Log("Se agregó un componente Rigidbody al objeto.");
             }
             Destroy(gameObject, 10f);
         }

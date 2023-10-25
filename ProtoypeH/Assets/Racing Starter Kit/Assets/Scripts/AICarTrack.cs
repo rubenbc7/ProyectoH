@@ -6,12 +6,12 @@ public class AICarTrack : MonoBehaviour
     //This script will move the AI waypoint tracker when the AI car triggers a point. The AI car will always follow the tracker
     //and the tracker will take the position of the next point that is placed on the racetrack
     private GameObject Point;
-    private int CurrentPoint;
+    [SerializeField] private int CurrentPoint;
     private string AICarName;
 
     private void Start()
     {
-        CurrentPoint = 1;//at the start of the race the AI car will drive to the first AI waypoint object
+        //CurrentPoint = 1;//at the start of the race the AI car will drive to the first AI waypoint object
         Point = GameObject.Find("Point" + CurrentPoint);    //the script will search the next point automatically
         this.transform.position = Point.transform.position; //then, it will get the position of the point and move the tracker to there 
         if (gameObject.name.Length == 13)//one-digit number name has 13 characters (for example: TrackerAICar2)

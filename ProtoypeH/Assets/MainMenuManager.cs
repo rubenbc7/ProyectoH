@@ -15,11 +15,14 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private SceneField _persistentGameplay;
     [SerializeField] private SceneField _levelScene ;
     [SerializeField] private SceneField _levelSceneExtra ;
+    [Header("Scenes to Unload")]
+
+    [SerializeField] private SceneField _scenesToUnload;
 
     private List<AsyncOperation> _scenesToLoad = new List<AsyncOperation>();
     private void Awake()
     {
-        //_loadingBarObject.SetActive(false);
+        _loadingBarObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -30,6 +33,9 @@ public class MainMenuManager : MonoBehaviour
         _scenesToLoad.Add(SceneManager.LoadSceneAsync(_levelScene, LoadSceneMode.Additive));
         _scenesToLoad.Add(SceneManager.LoadSceneAsync(_levelSceneExtra, LoadSceneMode.Additive));
 
+        
+        SceneManager.UnloadSceneAsync(_scenesToUnload);
+         
         StartCoroutine(ProgressLoadingBar());
     }
 
@@ -43,6 +49,7 @@ public class MainMenuManager : MonoBehaviour
     private IEnumerator ProgressLoadingBar()
     {
         float loadProgress = 0f;
+        _loadingBarObject.SetActive(true);
         for(int i = 0; i < _scenesToLoad.Count; i++)
         {
             while(!_scenesToLoad[i].isDone)
